@@ -32,3 +32,16 @@ theme_override_font_sizes/normal_font_size = 190
 text = "Obsidian параша
 Победа будет наша
 "
+
+[node name="TODO_ UI" type="Node2D" parent="."]
+
+[node name="Graph_info" type="Button" parent="TODO_ UI"]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Информация о графе
+(сколько чего, матрица смежности (она же видоизмененный массив adjacency))"
+
+[node name="Clear" type="Button" parent="TODO_ UI"]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Очистить граф"
