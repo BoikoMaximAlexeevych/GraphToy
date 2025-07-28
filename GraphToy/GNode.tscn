@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://bfynacb45nysn"]
+
+[ext_resource type="Script" uid="uid://cu6uj5wcsxjsn" path="res://g_node.gd" id="1_45h41"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4ajha"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_4ajha"]
+radius = 20.0
+height = 40.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cw4vo"]
+radius = 27.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_45h41"]
+radius = 433.042
+
+[node name="GNode" type="Node2D"]
+script = ExtResource("1_45h41")
+metadata/connected_nodes = []
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+material = SubResource("CanvasItemMaterial_4ajha")
+mesh = SubResource("SphereMesh_4ajha")
+
+[node name="Area2D" type="Area2D" parent="."]
+disable_mode = 2
+collision_layer = 7
+collision_mask = 7
+
+[node name="mouseCollision" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_cw4vo")
+
+[node name="repelArea" type="Area2D" parent="."]
+disable_mode = 2
+collision_layer = 16
+collision_mask = 16
+input_pickable = false
+priority = 1
+
+[node name="repelCollision" type="CollisionShape2D" parent="repelArea"]
+light_mask = 16
+visibility_layer = 16
+shape = SubResource("CircleShape2D_45h41")

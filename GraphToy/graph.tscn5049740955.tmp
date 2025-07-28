@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://pbtbux27lkgl"]
+
+[ext_resource type="PackedScene" uid="uid://bfynacb45nysn" path="res://Node.tscn" id="1_41hjn"]
+[ext_resource type="Script" uid="uid://but7kon3pcarh" path="res://graph.gd" id="1_2637j"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2637j"]
+radius = 2.0
+
+[node name="Graph" type="Node2D"]
+script = ExtResource("1_2637j")
+
+[node name="Node" parent="." instance=ExtResource("1_41hjn")]
+position = Vector2(988, 561)
+
+[node name="Mouse_sat" type="Area2D" parent="."]
+position = Vector2(988, 561)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mouse_sat"]
+shape = SubResource("CircleShape2D_2637j")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(111, 65, 233, 99, 368, 52, 469, 157)
