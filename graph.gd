@@ -1,16 +1,13 @@
 extends Node2D
 
 var GNODE = preload("res://GNode.tscn")
-
 var drag: bool = false
 @onready var mouse_sat = $Mouse_sat
-
 var lines : Array[Line2D]
 var current_line: Line2D
 var adjacency: Array[Array]
 var gnodes: Array
-
-var current_parent
+var current_parent : Gnode
 
 func is_gnode(subject) -> bool:
 	return subject.scene_file_path == GNODE.resource_path and subject.scene_file_path != null
@@ -24,7 +21,7 @@ func _process(delta: float) -> void:
 		if a:
 			drag = true
 			var int_pos = mouse_sat.get_overlapping_areas()[0].global_position
-			current_parent = mouse_sat.get_overlapping_areas()[0]
+			current_parent = mouse_sat.get_overlapping_areas()[0].owner
 			current_line = Line2D.new()
 			add_child(current_line)
 			current_line.width = 2.
@@ -43,15 +40,15 @@ func _process(delta: float) -> void:
 				current_line.free()
 			else:
 				var area = mouse_sat.get_overlapping_areas()[0]
-				if([current_parent.owner, area.owner] not in adjacency and [area.owner, current_parent.owner] not in adjacency):
+				if([current_parent, area.owner] not in adjacency and [area.owner, current_parent] not in adjacency):
 					var gnodea = area.owner
 					current_line.set_point_position(1, area.global_position)
 					lines.append(current_line)
 					print("Lines: ", lines.size())
 					if is_gnode(gnodea):
-						gnodea.get_meta("connected_nodes").append(current_parent.owner)
-						current_parent.owner.get_meta("connected_nodes").append(gnodea)
-						adjacency.append([current_parent.owner, gnodea])
+						gnodea.get_meta("connected_nodes").append(current_parent)
+						current_parent.get_meta("connected_nodes").append(gnodea)
+						adjacency.append([current_parent, gnodea])
 				else:
 					remove_child(current_line)
 					current_line.free()
@@ -75,3 +72,5 @@ func _process(delta: float) -> void:
 				lines[cnt].set_point_position(0, node1.global_position)
 				lines[cnt].set_point_position(1, node2.global_position)
 			cnt+=1
+		
+			

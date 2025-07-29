@@ -1,4 +1,5 @@
 extends Node2D
+class_name Gnode
 
 var velocity: Vector2
 var center_force: Vector2
