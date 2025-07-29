@@ -8,6 +8,7 @@ var link_force: Vector2
 var min_dist: float = 100
 
 @onready var repel_area = $repelArea
+@export var adjacencyComponent: AdjacencyComponent
 
 func _ready() -> void:
 	set_meta("connected_nodes", [])
@@ -21,10 +22,11 @@ func calculate_repel() -> Vector2:
 		var length = direction.length()
 		res -= direction / (length / 50 )
 	return res
+
 var prevvel: Vector2
 func _process(delta: float) -> void:
 	prevvel = velocity
-	var peers = get_meta("connected_nodes")
+	var peers = adjacencyComponent.adjacent_nodes
 	if peers.size() > 0:
 		for peer in peers:
 			link_force = (peer.position - self.position)

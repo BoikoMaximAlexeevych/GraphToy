@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://pbtbux27lkgl"]
+[gd_scene load_steps=4 format=3 uid="uid://pbtbux27lkgl"]
 
 [ext_resource type="Script" uid="uid://but7kon3pcarh" path="res://graph.gd" id="1_2637j"]
+[ext_resource type="Theme" uid="uid://c2uabiqp66kco" path="res://graphtoy_theme.tres" id="2_2637j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2637j"]
 radius = 2.0
@@ -8,40 +9,64 @@ radius = 2.0
 [node name="Graph" type="Node2D"]
 script = ExtResource("1_2637j")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="UI_Layer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="TODO_ UI" type="Node2D" parent="UI_Layer"]
+z_index = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI_Layer/TODO_ UI"]
+custom_minimum_size = Vector2(6.6, 0)
+offset_left = 1585.0
+offset_top = 44.0
+offset_right = 1861.0
+offset_bottom = 291.0
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Graph_info" type="Button" parent="UI_Layer/TODO_ UI/VBoxContainer"]
+editor_description = "(сколько чего, матрица смежности (она же видоизмененный массив adjacency))"
+layout_mode = 2
+theme = ExtResource("2_2637j")
+text = "Информация о графе"
+
+[node name="Clear" type="Button" parent="UI_Layer/TODO_ UI/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_2637j")
+text = "Очистить граф"
+
+[node name="BG_Root" type="Node2D" parent="UI_Layer"]
 z_index = -2
-offset_left = -62.0
-offset_top = -37.0
-offset_right = 2010.0
-offset_bottom = 1117.0
+position = Vector2(-62, -37)
+
+[node name="ColorRect" type="ColorRect" parent="UI_Layer/BG_Root"]
+z_index = -2
+offset_right = 2072.0
+offset_bottom = 1154.0
+mouse_filter = 2
 color = Color(0.0588191, 0.0658479, 0.0904152, 1)
 
-[node name="Mouse_sat" type="Area2D" parent="."]
-position = Vector2(988, 561)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Mouse_sat"]
-shape = SubResource("CircleShape2D_2637j")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = 28.0
-offset_top = 219.0
-offset_right = 1943.0
-offset_bottom = 1307.0
+[node name="RichTextLabel" type="RichTextLabel" parent="UI_Layer/BG_Root"]
+z_index = -1
+offset_left = 59.0
+offset_top = 45.0
+offset_right = 1964.0
+offset_bottom = 1086.0
+mouse_filter = 2
 theme_override_colors/default_color = Color(0.360784, 0.368627, 0.701961, 0.403922)
 theme_override_font_sizes/normal_font_size = 190
 text = "Obsidian параша
 Победа будет наша
 "
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="TODO_ UI" type="Node2D" parent="."]
+[node name="Mouse_sat" type="Area2D" parent="."]
+position = Vector2(988, 561)
+collision_layer = 3
+collision_mask = 3
 
-[node name="Graph_info" type="Button" parent="TODO_ UI"]
-offset_right = 8.0
-offset_bottom = 8.0
-text = "Информация о графе
-(сколько чего, матрица смежности (она же видоизмененный массив adjacency))"
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mouse_sat"]
+shape = SubResource("CircleShape2D_2637j")
 
-[node name="Clear" type="Button" parent="TODO_ UI"]
-offset_right = 8.0
-offset_bottom = 8.0
-text = "Очистить граф"
+[node name="Camera" type="Camera2D" parent="."]

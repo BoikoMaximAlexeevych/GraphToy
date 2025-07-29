@@ -3,14 +3,15 @@ extends Node2D
 var GNODE = preload("res://GNode.tscn")
 var drag: bool = false
 @onready var mouse_sat = $Mouse_sat
+@onready var Camera: Camera2D = $Camera
 var lines : Array[Line2D]
 var current_line: Line2D
 var adjacency: Array[Array]
 var gnodes: Array
 var current_parent : Gnode
 
-func is_gnode(subject) -> bool:
-	return subject.scene_file_path == GNODE.resource_path and subject.scene_file_path != null
+func _ready() -> void:
+	Camera.position = get_viewport_rect().get_center()
 
 func _process(delta: float) -> void:
 	var mouse = get_global_mouse_position()
@@ -45,9 +46,9 @@ func _process(delta: float) -> void:
 					current_line.set_point_position(1, area.global_position)
 					lines.append(current_line)
 					print("Lines: ", lines.size())
-					if is_gnode(gnodea):
-						gnodea.get_meta("connected_nodes").append(current_parent)
-						current_parent.get_meta("connected_nodes").append(gnodea)
+					if gnodea is Gnode:
+						gnodea.adjacencyComponent.adjacent_nodes.append(current_parent)
+						current_parent.adjacencyComponent.adjacent_nodes.append(gnodea)
 						adjacency.append([current_parent, gnodea])
 				else:
 					remove_child(current_line)
@@ -58,6 +59,10 @@ func _process(delta: float) -> void:
 		gnode.position = mouse
 		add_child(gnode)
 		gnodes.append(gnode)
+	elif Input.is_action_just_pressed("mouse_wheel_up"):
+		Camera.zoom *= 1.2
+	elif Input.is_action_just_pressed("mouse_wheel_down"):
+		Camera.zoom /= 1.2
 	if drag:
 		current_line.set_point_position(0, current_parent.global_position)
 		current_line.set_point_position(1, mouse)

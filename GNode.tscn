@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bfynacb45nysn"]
+[gd_scene load_steps=7 format=3 uid="uid://bfynacb45nysn"]
 
 [ext_resource type="Script" uid="uid://cu6uj5wcsxjsn" path="res://g_node.gd" id="1_45h41"]
+[ext_resource type="Script" uid="uid://dpdhye2f3oe2q" path="res://adjacency_component.gd" id="2_x7b4q"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4ajha"]
 
@@ -14,8 +15,9 @@ radius = 27.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_45h41"]
 radius = 433.042
 
-[node name="GNode" type="Node2D"]
+[node name="GNode" type="Node2D" node_paths=PackedStringArray("adjacencyComponent")]
 script = ExtResource("1_45h41")
+adjacencyComponent = NodePath("AdjacencyComponent")
 metadata/connected_nodes = []
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
@@ -41,3 +43,6 @@ priority = 1
 light_mask = 16
 visibility_layer = 16
 shape = SubResource("CircleShape2D_45h41")
+
+[node name="AdjacencyComponent" type="Node2D" parent="."]
+script = ExtResource("2_x7b4q")
