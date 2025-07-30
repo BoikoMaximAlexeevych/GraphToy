@@ -18,6 +18,9 @@ radius = 433.042
 [node name="GNode" type="Node2D" node_paths=PackedStringArray("adjacencyComponent")]
 script = ExtResource("1_45h41")
 adjacencyComponent = NodePath("AdjacencyComponent")
+centerForceCoef = 50.0
+repelForceCoef = 25.0
+linkForceCoef = 50.0
 metadata/connected_nodes = []
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]

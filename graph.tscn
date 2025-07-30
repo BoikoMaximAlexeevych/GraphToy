@@ -61,6 +61,27 @@ text = "Obsidian параша
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Tree" type="Tree" parent="UI_Layer"]
+offset_left = 1593.0
+offset_top = 229.0
+offset_right = 1864.0
+offset_bottom = 384.0
+tooltip_text = "Силы
+"
+theme = ExtResource("2_2637j")
+column_titles_visible = true
+hide_folding = true
+select_mode = 1
+scroll_horizontal_enabled = false
+scroll_vertical_enabled = false
+
+[node name="HSlider" type="HSlider" parent="UI_Layer/Tree"]
+offset_left = 23.0
+offset_top = 19.0
+offset_right = 246.0
+offset_bottom = 48.0
+theme = ExtResource("2_2637j")
+
 [node name="Mouse_sat" type="Area2D" parent="."]
 position = Vector2(988, 561)
 collision_layer = 3
